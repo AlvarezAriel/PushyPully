@@ -76,7 +76,7 @@ length = 1.0
 loop = false
 step = 0.1
 
-[node name="level_01" type="Node2D"]
+[node name="level_01" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 __meta__ = {
@@ -119,7 +119,6 @@ __meta__ = {
 "tilemap",
 ]]
 
-editor/display_folded = true
 mode = 0
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 8, 8 )
@@ -204,7 +203,7 @@ position = Vector2( 400, -32 )
 
 [node name="bird8" parent="walls" index="14" instance=ExtResource( 10 )]
 
-position = Vector2( 648, -128 )
+position = Vector2( 648.193, -127.613 )
 
 [node name="bird7" parent="walls" index="15" instance=ExtResource( 10 )]
 

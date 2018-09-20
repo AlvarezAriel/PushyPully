@@ -7,10 +7,7 @@ path="res://.import/bullet_hit_robot.wav-84be67cf6ae25bf83c6e77a02ea5d98c.sample
 [deps]
 
 source_file="res://bullet_hit_robot.wav"
-source_md5="b09253607833b4a8d7280f7e00cf890c"
-
 dest_files=[ "res://.import/bullet_hit_robot.wav-84be67cf6ae25bf83c6e77a02ea5d98c.sample" ]
-dest_md5="456d9627da24a5873babebbe459e5098"
 
 [params]
 

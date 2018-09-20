@@ -54,13 +54,14 @@ length = 1.0
 loop = false
 step = 0.1
 
-[node name="level_01" type="Node2D" index="0"]
+[node name="level_01" type="Node2D"]
 
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 nxt_level = "res://level_01.tscn"
+music = "res://level_01.ogg"
 
 [node name="bg" type="TileMap" parent="." index="0"]
 

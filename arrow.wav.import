@@ -7,10 +7,7 @@ path="res://.import/arrow.wav-21566a48b0eeffd590c8c29224c4a97f.sample"
 [deps]
 
 source_file="res://arrow.wav"
-source_md5="ebf813684cd46cfd63d31a98f493a1a0"
-
 dest_files=[ "res://.import/arrow.wav-21566a48b0eeffd590c8c29224c4a97f.sample" ]
-dest_md5="76b96642372ee90e1e8a47ae881aa7f0"
 
 [params]
 

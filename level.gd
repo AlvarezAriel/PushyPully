@@ -21,6 +21,9 @@ func _ready():
 func is_level( n ):
 	game.gamestate[ "level" ] = n
 
+func get_player():
+	return $player
+
 func _physics_process(delta):
 	if Input.is_key_pressed( KEY_ESCAPE ):
 		var m = preload( "res://pause_menu.tscn" ).instance()

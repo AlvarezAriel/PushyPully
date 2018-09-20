@@ -7,10 +7,7 @@ path="res://.import/player_die.wav-e5d7f3c4ea29cf9b7b650a6e67e92a33.sample"
 [deps]
 
 source_file="res://player_die.wav"
-source_md5="95d1f3c6e89f713baa51df8bf179540e"
-
 dest_files=[ "res://.import/player_die.wav-e5d7f3c4ea29cf9b7b650a6e67e92a33.sample" ]
-dest_md5="d188cc3ebe1d69357f326d606c16dce6"
 
 [params]
 

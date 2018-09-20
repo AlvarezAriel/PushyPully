@@ -7,10 +7,7 @@ path="res://.import/shot.ogg-bb3d97fb3789221feef2602d62f16406.oggstr"
 [deps]
 
 source_file="res://shot.ogg"
-source_md5="8942b6221dbc49d091cc62745311ac5b"
-
 dest_files=[ "res://.import/shot.ogg-bb3d97fb3789221feef2602d62f16406.oggstr" ]
-dest_md5="7627ea7ac70154dc0e56ee1c7192c3f0"
 
 [params]
 

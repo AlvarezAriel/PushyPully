@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
 [ext_resource path="res://tinyfont.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://text.gd" type="Script" id=4]
-[ext_resource path="res://glitch.shader" type="Shader" id=5]
-[ext_resource path="res://pixel.png" type="Texture" id=6]
-[ext_resource path="res://transition.shader" type="Shader" id=7]
-[ext_resource path="res://camera.gd" type="Script" id=8]
+[ext_resource path="res://analog/analog.tscn" type="PackedScene" id=5]
+[ext_resource path="res://glitch.shader" type="Shader" id=6]
+[ext_resource path="res://pixel.png" type="Texture" id=7]
+[ext_resource path="res://transition.shader" type="Shader" id=8]
+[ext_resource path="res://camera.gd" type="Script" id=9]
 
 [sub_resource type="GDScript" id=1]
 
@@ -26,22 +27,32 @@ func _physics_process(delta):
 	self.text = str( Engine.get_frames_per_second() )
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="ShaderMaterial" id=4]
 
 render_priority = 0
-shader = ExtResource( 5 )
+shader = ExtResource( 6 )
 shader_param/AMT = 0.0
 shader_param/SPEED = 0.6
 _sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=5]
 
 render_priority = 0
-shader = ExtResource( 7 )
+shader = ExtResource( 8 )
 shader_param/fade_level = 0.0
 _sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 
 length = 1.0
 loop = false
@@ -59,7 +70,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 
 length = 1.0
 loop = false
@@ -77,9 +88,8 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 
-resource_name = "glitch"
 length = 10.0
 loop = false
 step = 0.5
@@ -134,9 +144,8 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 
-resource_name = "start"
 length = 1.0
 loop = false
 step = 0.1
@@ -189,7 +198,7 @@ tracks/3/keys = {
 "values": [ 1.0 ]
 }
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 __meta__ = {
@@ -212,7 +221,6 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="fps_label" type="Label" parent="gui_layer" index="0"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -466,6 +474,7 @@ __meta__ = {
 
 [node name="text" type="Label" parent="gui_layer/gui" index="3"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -499,6 +508,63 @@ wait_time = 1.0
 one_shot = true
 autostart = false
 
+[node name="Analog" parent="gui_layer" index="2" instance=ExtResource( 5 )]
+
+position = Vector2( 283.454, 142.506 )
+scale = Vector2( 0.5, 0.5 )
+listenerNodePath = "/levels/player"
+
+[node name="shoot" type="TouchScreenButton" parent="gui_layer" index="3"]
+
+position = Vector2( 20, 100.917 )
+normal = null
+pressed = null
+bitmask = null
+shape = SubResource( 2 )
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = "shoot"
+visibility_mode = 1
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="gui_layer/shoot" index="0"]
+
+position = Vector2( -14.8493, -14.9662 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, 8 )
+vframes = 16
+hframes = 8
+frame = 101
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+[node name="bomb" type="TouchScreenButton" parent="gui_layer" index="4"]
+
+position = Vector2( 20, 142.465 )
+normal = null
+pressed = null
+bitmask = null
+shape = SubResource( 3 )
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="gui_layer/bomb" index="0"]
+
+position = Vector2( -15.0963, -14.2647 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -8, -20 )
+vframes = 16
+hframes = 8
+frame = 112
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
 [node name="transition_layer" type="CanvasLayer" parent="." index="2"]
 
 layer = 3
@@ -509,17 +575,19 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="glitchpixel" type="Sprite" parent="transition_layer" index="0"]
 
-material = SubResource( 2 )
+visible = false
+material = SubResource( 4 )
+position = Vector2( 0.219879, 0 )
 scale = Vector2( 320, 180 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 centered = false
 _sections_unfolded = [ "Material", "Offset", "Transform", "Visibility" ]
 
 [node name="transisionpixel" type="Sprite" parent="transition_layer" index="1"]
 
-material = SubResource( 3 )
+material = SubResource( 5 )
 scale = Vector2( 320, 180 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 centered = false
 _sections_unfolded = [ "Material", "Offset", "Transform", "Visibility" ]
 __meta__ = {
@@ -533,10 +601,10 @@ autoplay = "start"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 4.0
-anims/fade_in = SubResource( 4 )
-anims/fade_out = SubResource( 5 )
-anims/glitch = SubResource( 6 )
-anims/start = SubResource( 7 )
+anims/fade_in = SubResource( 6 )
+anims/fade_out = SubResource( 7 )
+anims/glitch = SubResource( 8 )
+anims/start = SubResource( 9 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
@@ -549,6 +617,7 @@ autostart = false
 
 [node name="camera" type="Camera2D" parent="." index="4"]
 
+visible = false
 anchor_mode = 1
 rotating = false
 current = true
@@ -571,13 +640,14 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Smoothing" ]
 
 [node name="music" type="AudioStreamPlayer" parent="." index="5"]
 
 stream = null
 volume_db = 0.0
+pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = "Master"
@@ -585,6 +655,10 @@ bus = "Master"
 [connection signal="text_finished" from="gui_layer/gui/text" to="." method="_on_text_text_finished"]
 
 [connection signal="timeout" from="gui_layer/gui/text/text_timer" to="gui_layer/gui/text" method="_on_text_timer_timeout"]
+
+[connection signal="pressed" from="gui_layer/shoot" to="." method="_on_shoot_pressed"]
+
+[connection signal="pressed" from="gui_layer/bomb" to="." method="_on_bomb_pressed"]
 
 [connection signal="timeout" from="loadtimer" to="." method="_on_loadtimer_timeout"]
 

@@ -7,10 +7,7 @@ path="res://.import/displacement_2.png-0ce673f2784da7f9b1898e0417a0bf14.stex"
 [deps]
 
 source_file="res://displacement_2.png"
-source_md5="b3793d720302d0c4506dcfb86e18ddf8"
-
 dest_files=[ "res://.import/displacement_2.png-0ce673f2784da7f9b1898e0417a0bf14.stex" ]
-dest_md5="7c88089ae87ce2b8eabee9fb69b128da"
 
 [params]
 

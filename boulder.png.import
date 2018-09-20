@@ -7,10 +7,7 @@ path="res://.import/boulder.png-1d830d31c99f24811af064939b7fdd20.stex"
 [deps]
 
 source_file="res://boulder.png"
-source_md5="145ac77d1d3afe4d2f6543134c140ab0"
-
 dest_files=[ "res://.import/boulder.png-1d830d31c99f24811af064939b7fdd20.stex" ]
-dest_md5="b7c0d56729759e21c5db30c5c48420f4"
 
 [params]
 

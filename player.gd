@@ -35,6 +35,7 @@ const FIRE_THROWBACK = 100
 
 var cur_gravity = GRAVITY
 var vel = Vector2()
+var analog_velocity = Vector2()
 var anim_cur = ""
 var anim_nxt = "idle"
 var update_anim = false
@@ -45,6 +46,8 @@ var is_invulnerable = false
 var is_firing = false
 var is_cutscene = false
 var can_fire = true
+var bomb_pressed = false
+var shoot_pressed = false
 
 var banana_tex = preload( "res://banana.png" )
 
@@ -113,6 +116,9 @@ func _physics_process( delta ):
 		# fire fsm
 		if is_firing:
 			is_firing = _fire_fsm( delta )
+			
+	shoot_pressed = false
+	bomb_pressed = false		
 
 
 
@@ -134,13 +140,13 @@ func is_on_stairs( positions ):
 #============================
 func _check_fire_btn( delta ):
 	if not can_fire: return
-	if is_firing: return
-	if Input.is_action_just_pressed( "btn_fire" ):
+	if shoot_pressed():
 		if game.gamestate["bullets"] > 0:
 			game.gamestate["bullets"] -= 1
 			_start_fire( delta )
+
 func _check_bomb_btn( delta ):
-	if game.gamestate["bombs"] > 0 and Input.is_action_just_pressed( "btn_fire" ):
+	if game.gamestate["bombs"] > 0 and bomb_pressed or shoot_pressed():
 		game.gamestate["bombs"] -= 1
 		_start_state_bomb( delta )
 #============================
@@ -213,7 +219,6 @@ func _fire_fsm( delta ):
 			# terminate fire state
 			return false
 	return true
-		
 
 
 #============================
@@ -227,15 +232,15 @@ func _start_state_idle( delta ):
 func _state_idle( delta ):
 	vel.x = lerp( vel.x, 0, DECEL_GROUND * delta )
 	# player input
-	if Input.is_action_pressed( "btn_left" ) or Input.is_action_pressed( "btn_right" ):
+	if right_pressed() or left_pressed():
 		state_nxt = STATES.RUN
-	if Input.is_action_just_pressed( "btn_up" ) and is_on_stairs( [ 2 ] ):
+	if jump_pressed() and is_on_stairs( [ 2 ] ):
 		_start_state_climb( delta )
-	elif Input.is_action_pressed( "btn_down" ) and is_on_stairs( [ 0 ] ):
+	elif down_pressed() and is_on_stairs( [ 0 ] ):
 		_start_state_climb( delta )
-	elif Input.is_action_pressed( "btn_down" ) and not is_on_stairs( [ 0 ] ):
+	elif down_pressed() and not is_on_stairs( [ 0 ] ):
 		_start_state_crouch( delta )
-	elif ( Input.is_action_just_pressed( "btn_jump" ) or Input.is_action_just_pressed( "btn_up" ) ) and is_on_floor():
+	elif ( jump_pressed() ) and is_on_floor():
 		_start_state_jump_up( delta )
 	if not is_on_floor():
 		_start_state_jumpdown( delta )
@@ -250,10 +255,10 @@ func _state_run( delta ):
 	anim_nxt = "run"
 	cur_gravity = GRAVITY
 	# player input
-	if Input.is_action_pressed( "btn_left" ):
+	if left_pressed():
 		vel.x = lerp( vel.x, -MAX_VEL_GROUND, ACCEL_GROUND * delta )
 		dir_nxt = -1
-	elif Input.is_action_pressed( "btn_right" ):
+	elif right_pressed():
 		vel.x = lerp( vel.x, MAX_VEL_GROUND, ACCEL_GROUND * delta )
 		dir_nxt = 1
 	else:
@@ -261,9 +266,9 @@ func _state_run( delta ):
 	
 	# stuff to do on the floor
 	if is_on_floor():
-		var bup = Input.is_action_just_pressed( "btn_up" )
-		var bdown = Input.is_action_just_pressed( "btn_down" )
-		var bjump = Input.is_action_just_pressed( "btn_jump" )
+		var bup = jump_pressed()
+		var bdown = down_pressed()
+		var bjump = jump_pressed()
 		# jump (bup has priority)
 		if bjump or bup:
 			_start_state_jump_up( delta )
@@ -275,6 +280,20 @@ func _state_run( delta ):
 		_start_state_jumpdown( delta )
 	_check_fire_btn( delta )
 
+func shoot_pressed():
+	return shoot_pressed or Input.is_action_pressed( "btn_fire" )
+
+func right_pressed():
+	return analog_velocity.x == 1 or Input.is_action_pressed( "btn_right" )
+
+func left_pressed():
+	return analog_velocity.x == -1 or Input.is_action_pressed( "btn_left" )
+	
+func jump_pressed():
+	return analog_velocity.y == -1 or Input.is_action_pressed( "btn_jump" ) or Input.is_action_pressed( "btn_up" )
+
+func down_pressed():
+	return analog_velocity.y == 1 or Input.is_action_pressed( "btn_down" )
 
 #============================
 # state jump up
@@ -319,23 +338,23 @@ func _state_jump( delta ):
 			_start_state_jumpdown( delta, true )
 		else:
 			# is still jumping?
-			if not ( Input.is_action_pressed( "btn_jump" ) or Input.is_action_pressed( "btn_up" ) ):# and not Input.is_action_pressed( "btn_up" ):
+			if not ( jump_pressed() ):# and not Input.is_action_pressed( "btn_up" ):
 				cur_gravity = GRAVITY
 		if is_on_floor():
 			_start_state_idle( delta )
-	if Input.is_action_pressed( "btn_left" ):
+	if left_pressed():
 		vel.x = lerp( vel.x, -MAX_VEL_AIR, ACCEL_AIR * delta )
 		dir_nxt = -1
-	elif Input.is_action_pressed( "btn_right" ):
+	elif right_pressed():
 		vel.x = lerp( vel.x, MAX_VEL_AIR, ACCEL_AIR * delta )
 		dir_nxt = 1
 	else:
 		vel.x = lerp( vel.x, 0, DECEL_AIR * delta )
-		if Input.is_action_pressed( "btn_fire" ):
+		if shoot_pressed():
 			vel.x = lerp( vel.x, 0, 10 * DECEL_AIR * delta )
 	_jump_climb_timer -= delta
 	if is_on_stairs([1]) and _jump_climb_timer <= 0:
-		if Input.is_action_pressed( "btn_up" ) or Input.is_action_pressed( "btn_down" ):
+		if jump_pressed():
 			_start_state_climb( delta )
 	_check_fire_btn( delta )
 
@@ -361,7 +380,7 @@ func _start_state_jumpdown( delta, is_jump = false, from_stairs = false ):
 func _state_jumpdown( delta ):
 	_jumpdown_timer -= delta
 	if _jumpdown_timer > 0:
-		if Input.is_action_just_pressed( "btn_jump" ) or Input.is_action_just_pressed( "btn_up" ):
+		if jump_pressed():
 			_start_state_jump_up( delta )
 			return
 	_fall_timer += delta
@@ -371,20 +390,20 @@ func _state_jumpdown( delta ):
 			if game.camera: game.camera.shake( 0.25, 30, 2 )
 		landing_dust()
 		_start_state_idle( delta )
-	if Input.is_action_pressed( "btn_left" ):
+	if left_pressed():
 		vel.x = lerp( vel.x, -MAX_VEL_AIR, ACCEL_AIR * delta )
 		dir_nxt = -1
-	elif Input.is_action_pressed( "btn_right" ):
+	elif right_pressed():
 		vel.x = lerp( vel.x, MAX_VEL_AIR, ACCEL_AIR * delta )
 		dir_nxt = 1
 	else:
 		vel.x = lerp( vel.x, 0, DECEL_AIR * delta )
 		#throwback
-		if Input.is_action_pressed( "btn_fire" ):
+		if shoot_pressed():
 			vel.x = lerp( vel.x, 0, 10 * DECEL_AIR * delta )
 	_grab_stairs_timer += delta
 	if is_on_stairs([2]) and _grab_stairs_timer > 0.2:
-		if Input.is_action_pressed( "btn_up" ) or Input.is_action_pressed( "btn_down" ):
+		if jump_pressed() or down_pressed():
 			_start_state_climb( delta )
 	_check_fire_btn( delta )
 
@@ -406,7 +425,7 @@ func _state_crouch( delta ):
 	if _state_crouch_timer <= 0:
 		# todo: look down
 		pass
-	if not Input.is_action_pressed( "btn_down" ):
+	if not down_pressed():
 		#$rotate/damagebox.position.y -= 4
 		$rotate/damagebox.position = Vector2( 0, -4 )
 		_start_state_idle( delta )
@@ -454,12 +473,12 @@ func _start_state_climb( delta ):
 func _state_climb( delta ):
 	# player input
 	var climb_dir = -1
-	if Input.is_action_pressed( "btn_up" ):
+	if jump_pressed():
 		vel.y = -CLIMB_VEL
 		anim_nxt = "climb"
 		$anim.playback_speed = 2
 		climb_dir = -1
-	elif Input.is_action_pressed( "btn_down" ):
+	elif down_pressed():
 		vel.y = CLIMB_VEL
 		anim_nxt = "climb"
 		$anim.playback_speed = -2
@@ -468,9 +487,9 @@ func _state_climb( delta ):
 		vel.y = 0
 		$anim.playback_speed = 0
 		anim_nxt = "climb"
-	if Input.is_action_pressed( "btn_left" ):
+	if left_pressed():
 		vel.x = -CLIMB_VEL / 2 #lerp( vel.x, -CLIMB_VEL, 1 * delta )
-	elif Input.is_action_pressed( "btn_right" ):
+	elif right_pressed():
 		vel.x = CLIMB_VEL / 2#lerp( vel.x, CLIMB_VEL, 1 * delta )
 	else:
 		vel.x = 0
@@ -618,13 +637,23 @@ func look_at_player():
 	$rotate/player.frame = 6
 
 
+func analog_force_change(inForce, inStick):
+	
+	analog_velocity = Vector2(inForce.x,-inForce.y)
+	
+	analog_velocity = analog_velocity.normalized()
+
+	analog_velocity.x = stepify(analog_velocity.x, 1)
+	analog_velocity.y = stepify(analog_velocity.y, 1)
+	
+	print("Analog: (%d,%d)" % [analog_velocity.x, analog_velocity.y])	
+
+func _on_shoot_pressed():
+	shoot_pressed = true
 
 
-
-
-
-
-
+func _on_bomb_pressed():
+	bomb_pressed = true
 
 #========================
 # audio functions

@@ -7,10 +7,7 @@ path="res://.import/bomb_fuse.wav-73f7036bc079f76e008f1855083e1c02.sample"
 [deps]
 
 source_file="res://bomb_fuse.wav"
-source_md5="bb0f9490cbdd7f066b1908b971f645aa"
-
 dest_files=[ "res://.import/bomb_fuse.wav-73f7036bc079f76e008f1855083e1c02.sample" ]
-dest_md5="3ca3cb9b121a5e99bd431003620a727c"
 
 [params]
 

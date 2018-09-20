@@ -7,10 +7,7 @@ path="res://.import/tinyfont.png-f7e35aaf356a82fd8ae140fc20f93598.stex"
 [deps]
 
 source_file="res://tinyfont.png"
-source_md5="8906c9598e01f9f36e5a097a1a34175a"
-
 dest_files=[ "res://.import/tinyfont.png-f7e35aaf356a82fd8ae140fc20f93598.stex" ]
-dest_md5="4357a3017105e5c66395881cdc87acff"
 
 [params]
 

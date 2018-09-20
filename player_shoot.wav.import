@@ -7,10 +7,7 @@ path="res://.import/player_shoot.wav-cd5cf16f3bd8ce0ca5c7420d37a73446.sample"
 [deps]
 
 source_file="res://player_shoot.wav"
-source_md5="32e3fae2c85d39187715d4f659c689ba"
-
 dest_files=[ "res://.import/player_shoot.wav-cd5cf16f3bd8ce0ca5c7420d37a73446.sample" ]
-dest_md5="065005bb4811074b3ac625a3b400741e"
 
 [params]
 

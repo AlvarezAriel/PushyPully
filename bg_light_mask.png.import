@@ -7,10 +7,7 @@ path="res://.import/bg_light_mask.png-1b747af76d4f9ef4401ba6bf7e0e9b65.stex"
 [deps]
 
 source_file="res://bg_light_mask.png"
-source_md5="03824ce6adda2e029bc6015b38b02f95"
-
 dest_files=[ "res://.import/bg_light_mask.png-1b747af76d4f9ef4401ba6bf7e0e9b65.stex" ]
-dest_md5="4cfd3228674cdf66dffe345e80bd81b3"
 
 [params]
 

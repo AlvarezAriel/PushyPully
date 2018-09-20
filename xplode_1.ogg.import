@@ -7,10 +7,7 @@ path="res://.import/xplode_1.ogg-943772660ff140dfa22f01c9632742f9.oggstr"
 [deps]
 
 source_file="res://xplode_1.ogg"
-source_md5="043f0489445c5055e9d23e94696df33b"
-
 dest_files=[ "res://.import/xplode_1.ogg-943772660ff140dfa22f01c9632742f9.oggstr" ]
-dest_md5="3a8cc8bbd4963027a2a0f11826bf52d4"
 
 [params]
 

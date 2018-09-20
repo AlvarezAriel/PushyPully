@@ -7,10 +7,7 @@ path="res://.import/scenario.png-1ebb3ce2a07ed4910131fe4f45f129e4.stex"
 [deps]
 
 source_file="res://scenario.png"
-source_md5="152617c66cd8d8169a59579a3e25a9d1"
-
 dest_files=[ "res://.import/scenario.png-1ebb3ce2a07ed4910131fe4f45f129e4.stex" ]
-dest_md5="8b6e0c786effa686df92668f9fc7036a"
 
 [params]
 

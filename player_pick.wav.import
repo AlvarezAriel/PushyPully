@@ -7,10 +7,7 @@ path="res://.import/player_pick.wav-5591fc3ba75d700508b9587aec9729a3.sample"
 [deps]
 
 source_file="res://player_pick.wav"
-source_md5="df3871772feddfcf43aa3b758d91b90b"
-
 dest_files=[ "res://.import/player_pick.wav-5591fc3ba75d700508b9587aec9729a3.sample" ]
-dest_md5="f566df44cedbd5958301025928b30aea"
 
 [params]
 

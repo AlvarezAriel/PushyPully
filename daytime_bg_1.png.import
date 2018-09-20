@@ -7,10 +7,7 @@ path="res://.import/daytime_bg_1.png-67a2b51fbae6b1f382534ace4ba45124.stex"
 [deps]
 
 source_file="res://daytime_bg_1.png"
-source_md5="c73d5252fdf12d8633b11cfdb1a6d115"
-
 dest_files=[ "res://.import/daytime_bg_1.png-67a2b51fbae6b1f382534ace4ba45124.stex" ]
-dest_md5="af13287f6af8ef010929173fb97a5add"
 
 [params]
 

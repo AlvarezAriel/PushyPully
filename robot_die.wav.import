@@ -7,10 +7,7 @@ path="res://.import/robot_die.wav-961c26926fa5cd232810d69ffa79399a.sample"
 [deps]
 
 source_file="res://robot_die.wav"
-source_md5="95d1f3c6e89f713baa51df8bf179540e"
-
 dest_files=[ "res://.import/robot_die.wav-961c26926fa5cd232810d69ffa79399a.sample" ]
-dest_md5="d188cc3ebe1d69357f326d606c16dce6"
 
 [params]
 

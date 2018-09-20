@@ -7,10 +7,7 @@ path="res://.import/robots.png-67975465ecc571aaff7a936c7cbaae2c.stex"
 [deps]
 
 source_file="res://robots.png"
-source_md5="770f0f86b940f06f4687195d65c6745b"
-
 dest_files=[ "res://.import/robots.png-67975465ecc571aaff7a936c7cbaae2c.stex" ]
-dest_md5="cd04ecfcc9524653e37be095f56d9e62"
 
 [params]
 

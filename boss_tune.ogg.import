@@ -7,10 +7,7 @@ path="res://.import/boss_tune.ogg-7783100f85d76bd75ab493fef421d60d.oggstr"
 [deps]
 
 source_file="res://boss_tune.ogg"
-source_md5="2f4ab9d86e0133485723596f99bd1ac1"
-
 dest_files=[ "res://.import/boss_tune.ogg-7783100f85d76bd75ab493fef421d60d.oggstr" ]
-dest_md5="36f493a39160bc6ac57acfe064b4c5bb"
 
 [params]
 

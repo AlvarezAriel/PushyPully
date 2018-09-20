@@ -7,10 +7,7 @@ path="res://.import/level_01.ogg-93f78fa2efc628b1894ba1523577be09.oggstr"
 [deps]
 
 source_file="res://level_01.ogg"
-source_md5="006bc6031f5320f1e85081d6654ba9d4"
-
 dest_files=[ "res://.import/level_01.ogg-93f78fa2efc628b1894ba1523577be09.oggstr" ]
-dest_md5="2e3f8799aaf9849e87c8ea696367fbd7"
 
 [params]
 

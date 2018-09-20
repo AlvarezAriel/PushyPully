@@ -4,8 +4,7 @@
 [ext_resource path="res://paralax_bg_daytime.tscn" type="PackedScene" id=2]
 [ext_resource path="res://title_text.png" type="Texture" id=3]
 [ext_resource path="res://tinyfont.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://menu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://text.png" type="Texture" id=6]
+[ext_resource path="res://ic_play.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -26,7 +25,12 @@ tracks/0/keys = {
 "values": [ Vector2( 160, 56 ), Vector2( 160, 80 ) ]
 }
 
-[node name="intro_screen" type="Node2D" index="0"]
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="intro_screen" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -102,45 +106,20 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="menu" parent="menu_layer" index="0" instance=ExtResource( 5 )]
+[node name="new_game" type="TouchScreenButton" parent="menu_layer" index="0"]
 
-position = Vector2( 116, 108 )
-
-[node name="new_game" type="Sprite" parent="menu_layer/menu" index="0"]
-
-texture = ExtResource( 6 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 96, 32 )
+position = Vector2( 146.399, 111.663 )
+normal = ExtResource( 5 )
+pressed = null
+bitmask = null
+shape = SubResource( 2 )
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="continue" type="Sprite" parent="menu_layer/menu" index="1"]
-
-position = Vector2( 8, 24 )
-texture = ExtResource( 6 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 32, 88, 32 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="quit" type="Sprite" parent="menu_layer/menu" index="2"]
-
-position = Vector2( 28, 48 )
-texture = ExtResource( 6 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 96, 40, 32 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[connection signal="selected_item" from="menu_layer/menu" to="." method="_on_menu_selected_item"]
+[connection signal="pressed" from="menu_layer/new_game" to="." method="_on_new_game_pressed"]
 
 

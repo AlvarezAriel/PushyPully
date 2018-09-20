@@ -449,7 +449,7 @@ func _on_cutscene_body_entered(body):
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="player" type="KinematicBody2D" index="0"]
+[node name="player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 262145
@@ -461,6 +461,7 @@ _sections_unfolded = [ "Collision", "collision" ]
 [node name="sfx" parent="." index="0" instance=ExtResource( 2 )]
 
 volume_db = -6.0
+pitch_scale = 1.0
 
 [node name="collision" type="CollisionShape2D" parent="." index="1"]
 
@@ -483,6 +484,7 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 3 )
 vframes = 16
 hframes = 8
+frame = 16
 _sections_unfolded = [ "Animation", "Region", "Transform", "Z Index" ]
 __meta__ = {
 "_edit_lock_": true

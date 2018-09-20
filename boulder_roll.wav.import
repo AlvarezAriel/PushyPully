@@ -7,10 +7,7 @@ path="res://.import/boulder_roll.wav-4babb901c941e543164efc5c718eddb3.sample"
 [deps]
 
 source_file="res://boulder_roll.wav"
-source_md5="339fa589201f94caa53661814f74ba3f"
-
 dest_files=[ "res://.import/boulder_roll.wav-4babb901c941e543164efc5c718eddb3.sample" ]
-dest_md5="b9ea93e4a9b193e7c408964d18eb2f55"
 
 [params]
 

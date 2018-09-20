@@ -7,10 +7,7 @@ path="res://.import/boss_jump.wav-718938a9338ef61cb0f9cf7bd142ab34.sample"
 [deps]
 
 source_file="res://boss_jump.wav"
-source_md5="ec4e4c63bdbce31512a811cf17dca3f8"
-
 dest_files=[ "res://.import/boss_jump.wav-718938a9338ef61cb0f9cf7bd142ab34.sample" ]
-dest_md5="baec931d92fd5dd038d14af707ff4868"
 
 [params]
 

@@ -1,8 +1,10 @@
 extends Node2D
 
 signal text_finished
+
 var _is_playing_intro = false
 var cur_stream = ""
+var player
 
 const FIRST_LEVEL = "res://level_01.tscn"#"test_stairs.tscn"#"end_level.tscn"#
 
@@ -21,6 +23,7 @@ var load_state = 0
 var cur_scn = ""
 func _load_scene( scn ):
 	print( "Loading level: ", scn, "   State: ", load_state )
+	
 	if load_state == 0:
 		# set current scene
 		cur_scn = scn
@@ -46,7 +49,10 @@ func _load_scene( scn ):
 		var act = load( cur_scn ).instance()
 		if act.has_method( "is_level" ):
 			act.is_level( cur_scn )
-			_connect_level( act )
+			_connect_level( act )	
+			player = act.get_player()
+			$gui_layer/Analog.listenerNode = player
+			
 		$levels.add_child( act )
 		# act specific settings
 		if cur_scn == "":
@@ -56,6 +62,8 @@ func _load_scene( scn ):
 		load_state = 3
 		$loadtimer.set_wait_time( 0.1 )
 		$loadtimer.start()
+		# Rebind player with analog controller	
+		
 	elif load_state == 3:
 		game.camera.reset_smoothing()
 		#show hud
@@ -67,11 +75,13 @@ func _load_scene( scn ):
 		load_state = 4
 		$loadtimer.set_wait_time( 0.3 )
 		$loadtimer.start()
+
 	elif load_state == 4:
 		# unpause game
 		#pause_game( false )
 		#_allowinput = true
 		load_state = 0
+
 
 
 
@@ -158,9 +168,11 @@ func play_music( nxt_music, restart_music = false ):
 		$music.play()
 
 
+func _on_shoot_pressed():
+	if (player != null):
+		player._on_shoot_pressed()
 
 
-
-
-
-
+func _on_bomb_pressed():
+	if (player != null):
+		player._on_bomb_pressed()

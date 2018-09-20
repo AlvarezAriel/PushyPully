@@ -7,10 +7,7 @@ path="res://.import/nighttime_bg_3.png-0a114cd1149670165d6dc5730f75da26.stex"
 [deps]
 
 source_file="res://nighttime_bg_3.png"
-source_md5="caaab867e95a3998a649b1157323dfd1"
-
 dest_files=[ "res://.import/nighttime_bg_3.png-0a114cd1149670165d6dc5730f75da26.stex" ]
-dest_md5="2aa6905dd01c8ec8c5ee9f59ab8b9add"
 
 [params]
 
